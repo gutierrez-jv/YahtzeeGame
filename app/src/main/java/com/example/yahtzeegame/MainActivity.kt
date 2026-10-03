@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.yahtzeegame.screen.YahtzeeScreen
 import com.example.yahtzeegame.ui.theme.YahtzeeGameTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -20,12 +19,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            YahtzeeGameTheme {
+                val viewModel: YahtzeeViewModel = viewModel()
 
-            val viewModel: YahtzeeViewModel = viewModel()
-
-            YahtzeeScreen(
-                viewModel = viewModel
-            )
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    YahtzeeScreen(
+                        viewModel = viewModel,
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
         }
     }
 }
